@@ -1,0 +1,850 @@
+﻿@model ReportViewModel
+
+<script src="~/js/jquery.PrintArea.js"></script>
+<style type="text/css">
+    .date {
+        height: 35px;
+    }
+
+    .myInput {
+        height: 35px;
+    }
+
+    .input-border {
+        width: 30px;
+    }
+</style>
+
+<div id="printArea">
+    <form id="reportForm" role="form" asp-controller="Home" asp-action="Create">
+        <div class="row">
+            <div class="col-md-12" style="text-align:center">
+                <h3><strong>医疗质量安全（不良）事件报告表</strong></h3>
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="form-inline">
+                            <strong>报告日期：</strong>
+                            <span>@Model.ReportYear</span>
+                            <strong>年</strong>
+                            <span>@Model.ReportMonth</span>
+                            <strong>月</strong>
+                            <span>@Model.ReportDay</span>
+                            <strong>日</strong>
+                            <span>@Model.ReportHour</span>
+                            <strong>时</strong>
+                            <span>@Model.ReportMinute</span>
+                            <strong>分</strong>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="form-inline">
+                            <strong>事件发生日期：</strong>
+                            <span>@Model.OccurrenceDateYear</span>
+                            <strong>年</strong>
+                            <span>@Model.OccurrenceDateMonth</span>
+                            <strong>月</strong>
+                            <span>@Model.OccurrenceDateDay</span>
+                            <strong>日</strong>
+                            <span>@Model.OccurrenceDateHour</span>
+                            <strong>时</strong>
+                            <span>@Model.OccurrenceDateMinute</span>
+                            <strong>分</strong>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="border:1px solid">
+            <div class="col-md-12">
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    <strong>A.&nbsp;&nbsp;</strong> 患者姓名：
+                                    <span>@Model.PatientName</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    性别：
+                                    <span>@Model.Sex</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    年龄：
+                                    <span>@Model.Age</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    职业：
+                                    <span>@Model.Job</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    住址：
+                                    <span>@Model.Address</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"  style="border-bottom:1px solid">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    科别：
+                                    <span>@Model.MedicalDepartment</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    床号：
+                                    <span>@Model.BedNum</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"  style="border-right:1px solid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    住院号：
+                                    <span>@Model.HospitalNumber</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-inline">
+                                    <strong>诊疗时间：</strong>
+                                    <span>@Model.CurativeTimeYear</span>
+                                    <strong>年</strong>
+                                    <span>@Model.CurativeTimeMonth</span>
+                                    <strong>月</strong>
+                                    <span>@Model.CurativeTimeDay</span>
+                                    <strong>日</strong>
+                                    <span>@Model.CurativeTimeHour</span>
+                                    <strong>时</strong>
+                                    <span>@Model.CurativeTimeMinute</span>
+                                    <strong>分</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"  style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Name">临床诊断：</label>
+                            <br />
+                            <span>@Model.ClinicalDiagnosis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <strong>B．不良事件情况</strong>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-2">
+                        <label>事件发生场所：</label>
+                        <input type="hidden" id="OccurrencePlace" name="OccurrencePlace" value="@Model.OccurrencePlace" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="OccurrencePlaceChk">
+                                <span>急诊</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="OccurrencePlaceChk">
+                                <span>门诊</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="OccurrencePlaceChk">
+                                <span>住院部</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="OccurrencePlaceChk">
+                                <span>医技部门</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="OccurrencePlaceChk">
+                                <span>行政后勤部门</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="OccurrencePlaceChk">
+                                <span>其他</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-2">
+                        <label>不良后果：</label>
+                        <input type="hidden" id="BadResult" name="BadResult" value="@Model.BadResult" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="BadResultChk">
+                                <span>无</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="BadResultChk">
+                                <span>有</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"  style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>不良后果描述：</label><br />
+                            <span>@Model.BedResultDescription</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Name">事件经过(可另加附页):</label><br />
+                            <span>@Model.EventsCourse</span>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <strong>C．不良事件类别</strong>
+                        <input type="hidden" id="BadEventsType" name="BadEventsType" value="@Model.BadEventsType" />
+                    </div>
+                </div>
+                <div class="row"  style="border-bottom:1px solid">
+                    <div class="col-md-6"  style="border-right:1px solid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>信息传递错误事件：医师、护理、医技判定意见错误、医嘱错误（口头及书面）、其他传递方式错误</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>治疗错误事件：患者、部位、器材、剂量等选择错误；不认真查对事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>方法（技术）错误事件：遗忘、未治疗、延期、时间或程序错误、不必要的治疗、灭菌（消毒）错误、体位错误等</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>药物调剂分发错误事件：医嘱、处方、给药、调剂等不良事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>输血事件：医嘱、备血、传送及输血不当引起的不良事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>设备器械使用事件：设备故障，一次性耗材出现问题或者设备使用不当导致的不良事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>导管操作事件：静点滴漏（渗）、导管脱落（断裂、堵塞）、连接错误等</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>医疗技术检查事件：检查人员无资质、标本丢失或弄错标本、试剂管理、医疗信息沟通错误；迟报、漏报、错报结果等</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>知情同意事件：如知情告知不准确、未行知情告知、告知与书面记录不一致、未行签字同意等</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>物品运送事件：如延迟、遗忘、丢失、破损、未按急需急送、品种规格错误等</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>患者及其家属依从性事件：患者及家属不按照医嘱，医院规定，依从性差造成的事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>公共设施事件：医院建筑、通道、其它工作物、有害物质外泄、放射线泄漏等相关事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>医患双方冲突事件：医患双方发生的不满、言语、肢体冲突等事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>治安事件：非医患双方之间的治安事件：如盗窃，患方与第三方的治安事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>医护安全事件：包括锐器刺伤、接触化疗药、传染病等导致损害的不良事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>非预期事件：非预期诊疗措施、重返ICU、花费大幅超出预期，住院时间延长等</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>不作为事件：医疗护理工作中已经发现问题，但未及时处现导致的不良事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>
+                                            基础护理事件：如摔倒、坠床、误吸、误咽、
+                                            无约束固定、烫伤事件等
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>
+                                            诊疗记录事件：包括诊疗记录丢失、未按要
+                                            求记录、记录内容失实或涂改、无资质人
+                                            员书写记录等
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="BadEventsTypeChk">
+                                        <span>其他事件：非上列之异常事件</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md-12">
+                        <strong>D. 事件处理情况（提供补救措施或改善建议）：</strong>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span>@Model.HandleSituations</span>
+                            <br />
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"  style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <strong>E. 不良事件评价（主管部门督导相应科室负责人填写）：</strong>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-2">
+                        <label>不良事件的等级：</label>
+                        <input type="hidden" id="EventsLevel" name="EventsLevel" value="@Model.EventsLevel" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="EventsLevelChk">
+                                <span>Ⅰ级事件</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="EventsLevelChk">
+                                <span>Ⅱ级事件</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="EventsLevelChk">
+                                <span>Ⅲ级事件</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="EventsLevelChk">
+                                <span>Ⅳ级事件</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        导致事件的可能原因：
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span>@Model.Reason</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        主管部门意见陈述：
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span>@Model.SupervisorOpinion</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <strong>F.持续改进措施（主管部门督导相应科室负责人填写）：</strong>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span>@Model.ImprovementMeasure</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid">
+                    <div class="col-md-12">
+                        <strong>G．选择性填写项目：</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>报告人：</label>
+                        <input type="hidden" id="ReportPersonType" name="ReportPersonType" value="@Model.ReportPersonType" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>医师</span>
+                                <input type="checkbox" name="ReportPersonTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>技师</span>
+                                <input type="checkbox" name="ReportPersonTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    护理人员
+                                </span>
+                                <input type="checkbox" name="ReportPersonTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    其他
+                                </span>
+                                <input type="checkbox" name="ReportPersonTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>当事人的类别：</label>
+                        <input type="hidden" id="ClientType" name="ClientType" value="@Model.ClientType" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    本院
+                                </span>
+                                <input type="checkbox" name="ClientTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    进修生
+                                </span>
+                                <input type="checkbox" name="ClientTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    研究生
+                                </span>
+                                <input type="checkbox" name="ClientTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    学生
+                                </span>
+                                <input type="checkbox" name="ClientTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    不详
+                                </span>
+                                <input type="checkbox" name="ClientTypeChk">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>职称：</label>
+                        <input type="hidden" id="ProfessionalTitle" name="ProfessionalTitle" value="@Model.ProfessionalTitle" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    高级
+                                </span>
+                                <input type="checkbox" name="ProfessionalTitleChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    中级
+                                </span>
+                                <input type="checkbox" name="ProfessionalTitleChk">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    初级
+                                </span>
+                                <input type="checkbox" name="ProfessionalTitleChk">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-inline">
+                            报告人签名：
+                            <span>@Model.ReportPersonName</span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-inline">
+                            科室：
+                            <span>@Model.ReportAdministrativeOffice</span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-inline">
+                            联系电话：
+                            <span>@Model.ReportContactPhoneNum</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <strong>备注：</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            1、本表A、B、C、D项和G项最后一栏由报告人填写， 其余项目由相关职能科室填写。
+                        </p>
+                        <p>
+                            2、不良事件定义（medical adverse event）是指在临床诊疗活动中以及医院运行过程中， 任何可能影响病人的诊疗结果、 增加病人的痛苦和负担并可能引发医疗纠纷或医疗事故，以及影响医疗工作的正常运行和医务人员人身安全的因素和事件。不良事件包括可预防的和不可预防的两种。
+                        </p>
+                        <p>
+                            3、报告范围：凡在医院内发生的或在院外转运病人时发生的不良事件均属主动报告的范围。
+                        </p>
+                        <p>
+                            4、Ⅰ级事件（警告事件）：非预期的死亡，或是非疾病自然进展过程中造成永久性功能丧失。
+                        </p>
+                        <p>
+                            5、Ⅱ级事件（不良后果事件）：在疾病医疗过程中是因诊疗活动而非疾病本身造成的病人机体与功能损害。
+                        </p>
+                        <p>
+                            6、Ⅲ级事件（未造成后果事件）：虽然发生的错误事实，但未给病人机体与功能造成任何损害，或有轻微后果而不需任何处理可完全康复。
+                        </p>
+                        <p>
+                            7、Ⅳ级事件（隐患事件）：由于及时发现错误，但未形成事实。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row" id="printDiv">
+    <div class="col-sm-12 text-center">
+        <button onclick="$('#footer').hide();$('#printDiv').hide(); print();" class="btn btn-default">打印</button>
+        <button onclick="goBack()" class="btn btn-default">返回</button>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script>
+        $(function () {
+            $("input[name='OccurrencePlaceChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#OccurrencePlace").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+
+            $("input[name='BadResultChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#BadResult").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+
+            $("input[name='BadEventsTypeChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#BadEventsType").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+            $("input[name='EventsLevelChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#EventsLevel").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+            $("input[name='ReportPersonTypeChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#ReportPersonType").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+            $("input[name='ClientTypeChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#ClientType").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+            $("input[name='ProfessionalTitleChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($("#ProfessionalTitle").val()) > -1) {
+                    $(this).prop('checked', true);
+                    return;
+                }
+            });
+            $("input[type=checkbox]").click(function () { return false;});
+        });
+        function goBack() {
+            window.location.href = "/home/index";
+        }
+    </script>
+}
+
+

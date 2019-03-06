@@ -1,0 +1,187 @@
+﻿@model List<ReportViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <title>医疗质量安全（不良）事件报告列表</title>
+</head>
+<div class="row">
+    <div class="col-md-12" style="text-align:center">
+        <h4><strong>医疗质量安全（不良）事件报告列表</strong></h4>
+        <br />
+    </div>
+</div>
+<br />
+@*<fieldset style="border:thin">*@
+@*<legend>查询</legend>*@
+<div class="row">
+    <div class="col-md-3">
+        <label class="form-inline">
+            患者姓名：
+            <input type="text" class="form-control myInput" style="width:50%;" id="PatientName" name="PatientName">
+        </label>
+    </div>
+    <div class="col-md-3">
+        <label class="form-inline">
+            科别：
+            <input type="text" class="form-control myInput" style="width:50%;" id="MedicalDepartment" name="MedicalDepartment">
+        </label>
+    </div>
+    <div class="col-md-3">
+        <label class="form-inline">
+            住院号：
+            <input type="text" class="form-control myInput" style="width:50%;" id="HospitalNumber" name="HospitalNumber">
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 text-right">
+        <button type="button" onclick="Query()" class="btn btn-default">查询</button>
+        <button type="button" onclick="Create()" class="btn btn-default">新增</button>
+    </div>
+</div>
+@*</fieldset>*@
+<br />
+<div class="table-responsive ">
+    <table class="table table-striped">
+        @*<caption>医疗质量安全（不良）事件报告列表</caption>*@
+        <thead>
+            <tr>
+                <th hidden="hidden">Id</th>
+                <th>报告日期</th>
+                <th>事件发生日期</th>
+                <th>患者姓名</th>
+                <th>科别</th>
+                <th>住院号</th>
+                <th>事件发生场所</th>
+                <th width="10%" class="text-center">不良事件<br />类别</th>
+                <th>报告人</th>
+                <th>报告人签名</th>
+                <th width="15%">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var report in Model)
+                {
+                    <tr>
+                        <td hidden="hidden">@report.Id</td>
+                        <td>@(new DateTime(report.ReportYear, report.ReportMonth, report.ReportDay, report.ReportHour, report.ReportMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
+                        <td>@(new DateTime(report.OccurrenceDateYear, report.OccurrenceDateMonth, report.OccurrenceDateDay, report.OccurrenceDateHour, report.OccurrenceDateMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
+                        <td>@report.PatientName</td>
+                        <td>@report.MedicalDepartment</td>
+                        <td>@report.HospitalNumber</td>
+                        <td>@report.OccurrencePlace</td>
+                        <td width="10%">@report.BadEventsType</td>
+                        <td>@report.ReportPersonType</td>
+                        <td>@report.ReportPersonName</td>
+                        <td width="15%">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Edit('@report.Id')">
+                                        修改
+                                    </button>
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+
+                                    <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Detail('@report.Id')">
+                                        查看
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Delete('@report.Id')">
+                                        删除
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="Detail('@report.Id')">
+                                        打印
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+</div>
+<div class="row">
+    <div class="col-md-9 text-left">
+        每页 @ViewBag.recordPerPage 条记录，共有 @ViewBag.totalRecord 条记录。 第 @(ViewBag.totalRecord == 0 ? 0 : ViewBag.page) 页 ,共 @ViewBag.totalPage 页
+    </div>
+    <div class="col-md-3 text-right">
+        <div class="container">
+            @if (ViewBag.totalRecord != 0)
+            {
+                <ul class="pagination pagination-lg">
+                    @if (ViewBag.page != 1)
+                    {
+                        <li><a href="@Url.Action("Index", new { PatientName= ViewBag.PatientName,MedicalDepartment=ViewBag.MedicalDepartment,HospitalNumber=ViewBag.HospitalNumber, page =(int)(ViewBag.page) -1})">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    }
+                    else
+                    {
+                        <li><a>上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    }
+                    @if (ViewBag.page != ViewBag.totalPage)
+                    {
+                        <li><a href="@Url.Action("Index", new { PatientName= ViewBag.PatientName,MedicalDepartment=ViewBag.MedicalDepartment,HospitalNumber=ViewBag.HospitalNumber, page = (int)(ViewBag.page) + 1 })">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    }
+                    else
+                    {
+                        <li><a>下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .active {
+        text-decoration: underline;
+    }
+</style>
+
+@section Scripts
+    {
+    <script>
+        function Create() {
+            self.location = '/home/create';
+        }
+        function Detail(id) {
+            self.location = '/home/Detail?id=' + id;
+        }
+        function Query() {
+            self.location = '/home/Index?patientName=' + $("#PatientName").val() + "&medicalDepartment=" + $("#MedicalDepartment").val() + "&hospitalNumber=" + $("#HospitalNumber").val();
+        }
+        function Delete(id) {
+            bootbox.confirm({
+                message: "确定要删除吗？",
+                buttons: {
+                    cancel: {
+                        label: "取消"
+                    },
+                     confirm: {
+                        label: "确定"
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        self.location = '/home/Delete?id=' + id;
+                    } else {
+                        return;
+                    }
+                }
+            });
+        }
+            function Edit(id) {
+                self.location = '/home/Edit?id=' + id;
+            }
+    </script>
+}
