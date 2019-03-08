@@ -43,22 +43,22 @@
 </div>
 @*</fieldset>*@
 <br />
-<div class="table-responsive ">
+<div class="table-responsive " style="max-width:99.7%;">
     <table class="table table-striped">
         @*<caption>医疗质量安全（不良）事件报告列表</caption>*@
         <thead>
             <tr>
                 <th hidden="hidden">Id</th>
                 <th>报告日期</th>
-                <th>事件发生日期</th>
-                <th>患者姓名</th>
+                <th class="text-center">事件发生<br />日期</th>
+                <th style="white-space:nowrap;">患者姓名</th>
                 <th>科别</th>
                 <th>住院号</th>
-                <th>事件发生场所</th>
-                <th width="10%" class="text-center">不良事件<br />类别</th>
+                <th class="text-center">事件发生<br />场所</th>
+                <th style="max-width:10%;" class="text-center">不良事件<br />类别</th>
                 <th>报告人</th>
-                <th>报告人签名</th>
-                <th width="15%">操作</th>
+                <th>报告人<br />签名</th>
+                <th style="max-width:14%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -70,7 +70,7 @@
                         <td hidden="hidden">@report.Id</td>
                         <td>@(new DateTime(report.ReportYear, report.ReportMonth, report.ReportDay, report.ReportHour, report.ReportMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
                         <td>@(new DateTime(report.OccurrenceDateYear, report.OccurrenceDateMonth, report.OccurrenceDateDay, report.OccurrenceDateHour, report.OccurrenceDateMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
-                        <td>@report.PatientName</td>
+                        <td width="3%">@report.PatientName</td>
                         <td>@report.MedicalDepartment</td>
                         <td>@report.HospitalNumber</td>
                         <td>@report.OccurrencePlace</td>
@@ -79,28 +79,37 @@
                         <td>@report.ReportPersonName</td>
                         <td width="15%">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Edit('@report.Id')">
-                                        修改
-                                    </button>
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
-
-                                    <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Detail('@report.Id')">
-                                        查看
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Delete('@report.Id')">
-                                        删除
-                                    </button>
-                                    <button type="button" class="btn btn-default" onclick="Detail('@report.Id')">
-                                        打印
-                                    </button>
-                                </div>
+                                @{
+                                    string userId = string.Empty;
+                                    var subject = User.Claims.Where(p => p.Type == "sub").FirstOrDefault();
+                                    if(subject != null)
+                                    {
+                                        userId = subject.Value;
+                                    }
+                                    <div class="col-md-5">
+                                        @if (!string.IsNullOrEmpty(userId) && ViewBag.AllowedMD.Contains(userId))
+                                        {
+                                            <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Edit('@report.Id')">
+                                                修改
+                                            </button>
+                                        }
+                                        <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Detail('@report.Id')">
+                                            查看
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @if (!string.IsNullOrEmpty(userId) && ViewBag.AllowedMD.Contains(userId))
+                                        {
+                                            <button type="button" class="btn btn-default" style="margin-bottom:10px" onclick="Delete('@report.Id')">
+                                                删除
+                                            </button>
+                                        }
+                                        <button type="button" class="btn btn-default" onclick="Detail('@report.Id')">
+                                            打印
+                                        </button>
+                                    </div>
+                                }
                             </div>
-
 
                         </td>
                     </tr>
@@ -119,7 +128,7 @@
         <div class="container">
             @if (ViewBag.totalRecord != 0)
             {
-                <ul class="pagination pagination-lg">
+                <ul class="pagination pagination-lg" style="float: right;">
                     @if (ViewBag.page != 1)
                     {
                         <li><a href="@Url.Action("Index", new { PatientName= ViewBag.PatientName,MedicalDepartment=ViewBag.MedicalDepartment,HospitalNumber=ViewBag.HospitalNumber, page =(int)(ViewBag.page) -1})">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>

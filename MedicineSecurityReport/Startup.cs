@@ -68,6 +68,7 @@ namespace MedicineSecurityReport
                //    return Task.FromResult(0);
                //};
            });
+           
             services.AddDapperDBContext<ReportDBContext>(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("Default");
@@ -101,6 +102,7 @@ namespace MedicineSecurityReport
             {
                 y.AddProfile<MyProfile>();
             });
+            SiteConfig.SetAppSetting(Configuration.GetSection("AllowedMD"));
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

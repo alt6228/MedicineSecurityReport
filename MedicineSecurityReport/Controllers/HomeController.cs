@@ -8,6 +8,7 @@ using MedicineSecurityReport.Models;
 using MedicineSecurityReport.Domain;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using MedicineSecurityReport.Common;
 
 namespace MedicineSecurityReport.Controllers
 {
@@ -24,6 +25,7 @@ namespace MedicineSecurityReport.Controllers
         [Authorize]
         public async Task<IActionResult> Index(int? page, string PatientName = "",string MedicalDepartment="",string HospitalNumber="")
         {
+
             int pageNumber = page ?? 1;
             ViewBag.page = pageNumber;
             int recordPerPage = 10;
@@ -56,6 +58,7 @@ namespace MedicineSecurityReport.Controllers
             ViewBag.PatientName = PatientName;
             ViewBag.MedicalDepartment = MedicalDepartment;
             ViewBag.HospitalNumber = HospitalNumber;
+            ViewBag.AllowedMD = SiteConfig.GetSite("MD");
             return View(reportList);
         }
 
