@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>医疗安全事件报告系统</title>
+    <title>医疗护理安全事件报告系统</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -22,7 +22,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-blue border-bottom box-shadow mb-3" style="background-color:darkgray">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" title="显示医疗质量安全（不良）事件报告列表">医疗质量安全（不良）事件报告</a>
+                <a class="navbar-brand" asp-area="" title="医护安全事件报告系统" style="margin-right: 2rem;margin-left: -2rem;">医护安全事件报告系统</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">主页</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" title="点击前往医疗质量安全（不良）事件报告列表">医疗安全</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="NurseReport" asp-action="Index" title="点击前往护理不良事件讨论改进记录列表">护理安全</a>
                         </li>
                     </ul>
                 </div>

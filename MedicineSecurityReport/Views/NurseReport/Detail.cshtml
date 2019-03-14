@@ -1,0 +1,299 @@
+﻿@model NurseReportViewModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<style type="text/css">
+    .date {
+        height: 35px;
+        margin: 5px 0px 5px 0px;
+    }
+
+    .myInput {
+        height: 35px;
+        max-width: 100%;
+        vertical-align: central;
+        margin: 5px 5px 5px 5px;
+    }
+
+    .input-border {
+        width: 30px;
+    }
+
+    .div-border {
+        border: 1px solid;
+        text-align: center;
+    }
+
+    .div-border-top {
+        border-top: 1px solid;
+        text-align: center;
+    }
+
+    .div-border-bottom {
+        border-bottom: 1px solid;
+        text-align: center;
+    }
+
+    .div-border-left {
+        border-left: 1px solid;
+        text-align: center;
+    }
+
+    .div-border-right {
+        border-right: 1px solid;
+        text-align: center;
+    }
+    .div-height{
+        min-height:35px;
+    }
+</style>
+
+<form id="nurseReportForm" role="form">
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <h3><strong>护理不良事件讨论改进记录</strong></h3>
+            <br />
+        </div>
+    </div>
+    <div class="row div-border">
+        <input type="hidden" value="@Model.Id" id="Id" name="Id" />
+        <div class="col-md-2 div-border-right div-height">
+                护士（当事人）姓名
+        </div>
+        <div class="col-md-1 div-border-right div-height">
+                性别
+        </div>
+        <div class="col-md-1 div-border-right div-height">
+                年龄
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+                职称
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+                能级
+        </div>
+        <div class="col-md-4 div-height">
+                事件发生的时间
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right">
+        <div class="col-md-2 div-border-right div-height">
+                <span>@Model.NurseName</span>
+        </div>
+        <div class="col-md-1 div-border-right div-height">
+                <span>@Model.Sex</span>
+        </div>
+        <div class="col-md-1 div-border-right div-height">
+            <span>@Model.Age</span>
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+            <span>@Model.ProfessionalTitle</span>
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+            <span>@Model.AbilityLevel</span>
+        </div>
+        <div class="col-md-4 text-center div-height">
+                <span>@Model.OccurrenceDateYear</span>
+                年
+                <span>@Model.OccurrenceDateMonth</span>
+                月
+                <span>@Model.OccurrenceDateDay</span>
+                日
+                <span>@Model.OccurrenceDateHour</span>
+                时
+                <span>@Model.OccurrenceDateMinute</span>
+                分
+        </div>
+    </div>
+    <div class="row div-border">
+        <div class="col-md-2 div-border-right div-height">
+                贵宾姓名
+        </div>
+        <div class="col-md-1 div-border-right div-height">
+                性别
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+                年龄
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+                职业
+        </div>
+        <div class="col-md-2 div-border-right div-height">
+                住院号/门诊号
+        </div>
+        <div class="col-md-3 text-center div-height">
+                事件发生的地点
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 div-border-left div-border-right div-border-bottom div-height">
+                <span>@Model.DistinguishedGuests</span>
+        </div>
+        <div class="col-md-1 div-border-right div-border-bottom div-height">
+                <span>@Model.GuestsSex</span>
+        </div>
+        <div class="col-md-2 div-border-right div-border-bottom div-height">
+            <span>@Model.GuestsAge</span>
+        </div>
+        <div class="col-md-2 div-border-right div-border-bottom div-height">
+            <span>@Model.Job</span>
+        </div>
+        <div class="col-md-2 div-border-right div-border-bottom div-height">
+            <span>@Model.HospitalNumber</span>
+        </div>
+        <div class="col-md-3 div-border-right div-border-bottom div-height">
+            <span>@Model.OccurrencePlace</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 div-border-left div-border-bottom div-border-right">
+            <div class="row div-border-bottom">
+                <div class="col-md-6 div-border-right div-height">
+                    主要诊断
+                </div>
+                <div class="col-md-6 div-height">
+                    <span>@Model.MainDiagnoses</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 div-border-right div-height">
+                    事件发生次要责任人
+                </div>
+                <div class="col-md-6 div-height">
+                    <span>@Model.MinorChargePerson</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 div-border-bottom div-border-right">
+            <div class="row">
+                <div class="col-md-10 text-left">
+                    <label>事件发生等级：</label>
+                    <input type="hidden" value="@Model.EventsLevel" id="EventsLevel" name="EventsLevel" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅰ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅱ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅲ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅳ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">事件发生的过程及采取的措施：</label>
+                <br />
+                <span style="margin-left:20px;">@Model.EventsCourseHandleSituations</span>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">科室讨论分析及定性：</label>
+                <br />
+                <span style="margin-left:20px;">@Model.QualitativeAnalysis</span>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">科室处理及整改意见：</label>
+                <br />
+                <span style="margin-left:20px;">@Model.OfficeImprovementMeasure</span>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="offset-md-10 col-md-2" style="float:right">
+            <label class="form-inline">
+                <span>@Model.OfficeSignYear</span>
+                年
+                <span>@Model.OfficeSignMonth</span>
+                月
+                <span>@Model.OfficeSignDay</span>
+                日
+            </label>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right ">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">护理部处理及整改意见：</label>
+                <br />
+                <span style="margin-left:20px;">@Model.NursingDepartmentImprovementMeasure</span>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="offset-md-10 col-md-2" style="float:right">
+            <label class="form-inline">
+                <span>@Model.NursingDepartmentSignYear</span>
+                年
+                <span>@Model.NursingDepartmentSignMonth</span>
+                月
+                <span>@Model.NursingDepartmentSignDay</span>
+                日
+            </label>
+        </div>
+    </div>
+    <div class="row" id="printDiv" style="margin-top:10px;">
+        <div class="col-sm-12 text-center">
+            <button onclick="$('#footer').hide();$('#printDiv').hide(); print();" class="btn btn-default">打印</button>
+            <button type="button" id="btnBack" onclick="goBack()" class="btn btn-default">返回</button>
+        </div>
+    </div>
+</form>
+@section Scripts
+    {
+    <script>
+        $(function () {
+            $("input[name='EventsLevelChk']:checkbox").each(function () {
+                if ($.trim($($(this).parent().find("span")).text()).indexOf($.trim($("#EventsLevel").val())) > -1) {
+                    $(this).prop('checked', true)
+                    return;
+                }
+            });
+            $("input[type=checkbox]").click(function () { return false; });
+        });
+
+
+        function goBack() {
+            window.location.href = "/nursereport/index";
+        }
+    </script>
+}
+
+

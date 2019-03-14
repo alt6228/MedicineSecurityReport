@@ -68,7 +68,7 @@ namespace MedicineSecurityReport
                //    return Task.FromResult(0);
                //};
            });
-           
+
             services.AddDapperDBContext<ReportDBContext>(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("Default");
@@ -76,6 +76,7 @@ namespace MedicineSecurityReport
             services.AddAutoMapper();
             
             services.AddTransient<IReportRepository, ReportRepository>();
+            services.AddTransient<INurseReportRepository, NurseReportRepository>();
             services.AddTransient<IUnitOfWorkFactory, DapperUnitOfWorkFactory>();
 
         }

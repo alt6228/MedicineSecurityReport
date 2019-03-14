@@ -1,0 +1,383 @@
+﻿@model NurseReportViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style type="text/css">
+    .date {
+        height: 35px;
+        margin: 5px 0px 5px 0px;
+    }
+
+    .myInput {
+        height: 35px;
+        max-width:100%;
+        vertical-align:central;
+        margin:5px 5px 5px 5px;
+    }
+
+    .input-border {
+        width: 30px;
+    }
+    .div-border {
+        border: 1px solid;
+        text-align: center;
+    }
+    .div-border-top {
+        border-top: 1px solid;
+        text-align: center;
+    }
+    .div-border-bottom {
+        border-bottom: 1px solid;
+        text-align:center;
+    }
+    .div-border-left {
+        border-left: 1px solid;
+        text-align: center;
+    }
+    .div-border-right {
+        border-right: 1px solid;
+        text-align: center;
+    }
+</style>
+
+<form id="nurseReportForm" role="form">
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <h3><strong>护理不良事件讨论改进记录</strong></h3>
+            <br />
+        </div>
+    </div>
+    <div class="row div-border">
+        <div class="col-md-2 div-border-right ">
+            <label class="form-inline">
+                护士（当事人）姓名
+            </label>
+        </div>
+        <div class="col-md-1 div-border-right">
+            <label class="form-inline">
+                性别
+            </label>
+        </div>
+        <div class="col-md-1 div-border-right">
+            <label class="form-inline">
+                年龄
+            </label>
+        </div>
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline">
+                职称
+            </label>
+        </div>
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline">
+                能级
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label class="form-inline">
+                事件发生的时间
+            </label>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right">
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline myInput">
+                <input type="text" class="form-control" required maxlength="20" style="max-width:100%" name="NurseName">
+            </label>
+        </div>
+        <div class="col-md-1 div-border-right">
+            <label class="form-inline myInput">
+                <select class="form-control" name="Sex" style="position:relative;padding-right:0px;padding-left:0px;">
+                    <option selected="selected">男</option>
+                    <option>女</option>
+                    <option>未知</option>
+                </select>
+            </label>
+        </div>
+        <div class="col-md-1 div-border-right">
+            <input type="text" maxlength="3" required oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control myInput" name="Age">
+        </div>
+        <div class="col-md-2 div-border-right">
+            <input type="text" maxlength="10" required class="form-control myInput" name="ProfessionalTitle">
+        </div>
+        <div class="col-md-2 div-border-right">
+            <input type="text" maxlength="20" required class="form-control myInput" name="AbilityLevel">
+        </div>
+        <div class="col-md-4">
+            <label class="form-inline">
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" minlength="4" maxlength="4" class="form-control date" style="width:22%;" name="OccurrenceDateYear">
+                <strong>年</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="12" class="form-control date" style="width:13%;" name="OccurrenceDateMonth">
+                <strong>月</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="31" class="form-control date" style="width:13%;" name="OccurrenceDateDay">
+                <strong>日</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="24" class="form-control date" style="width:13%;" name="OccurrenceDateHour">
+                <strong>时</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="59" class="form-control date" style="width:13%;" name="OccurrenceDateMinute">
+                <strong>分</strong>
+            </label>
+        </div>
+    </div>
+    <div class="row div-border">
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline">
+                贵宾姓名
+            </label>
+        </div>
+        <div class="col-md-1 div-border-right">
+            <label class="form-inline">
+                性别
+            </label>
+        </div>
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline">
+                年龄
+            </label>
+        </div>
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline">
+                职业
+            </label>
+        </div>
+        <div class="col-md-2 div-border-right">
+            <label class="form-inline">
+                住院号/门诊号
+            </label>
+        </div>
+        <div class="col-md-3">
+            <label class="form-inline">
+                事件发生的地点
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 div-border-left div-border-right div-border-bottom">
+            <label class="form-inline">
+                <input type="text" class="form-control myInput" required maxlength="20" name="DistinguishedGuests">
+            </label>
+        </div>
+        <div class="col-md-1 div-border-right div-border-bottom">
+            <label class="form-inline myInput">
+                <select class="form-control" name="GuestsSex" style="position:relative;padding-right:0px;padding-left:0px;">
+                    <option selected="selected">男</option>
+                    <option>女</option>
+                    <option>未知</option>
+                </select>
+            </label>
+        </div>
+        <div class="col-md-2 div-border-right div-border-bottom">
+            <input type="text" maxlength="3" required oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control myInput" name="GuestsAge">
+        </div>
+        <div class="col-md-2 div-border-right div-border-bottom">
+            <input type="text" maxlength="50" required class="form-control myInput" name="Job">
+        </div>
+        <div class="col-md-2 div-border-right div-border-bottom">
+            <input type="text" maxlength="50" required class="form-control myInput" name="HospitalNumber">
+        </div>
+        <div class="col-md-3 div-border-right div-border-bottom">
+            <input type="text" maxlength="100" required class="form-control myInput" name="OccurrencePlace">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 div-border-left div-border-bottom div-border-right">
+            <div class="row div-border-bottom">
+                <div class="col-md-6 div-border-right">
+                    主要诊断
+                </div>
+                <div class="col-md-6">
+                    <input type="text" maxlength="200" required class="form-control myInput" name="MainDiagnoses">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 div-border-right">
+                    事件发生次要责任人
+                </div>
+                <div class="col-md-6">
+                    <input type="text" maxlength="100" required class="form-control myInput" name="MinorChargePerson">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 div-border-bottom div-border-right">
+            <div class="row">
+                <div class="col-md-10 text-left">
+                    <label>事件发生等级：</label>
+                    <input type="hidden" id="EventsLevel" name="EventsLevel" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅰ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅱ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅲ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label>
+                            <span>Ⅳ级</span>
+                            <input type="checkbox" name="EventsLevelChk">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">事件发生的过程及采取的措施：</label>
+                <textarea class="form-control" required maxlength="200" name="EventsCourseHandleSituations"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">科室讨论分析及定性：</label>
+                <textarea class="form-control" required maxlength="200" name="QualitativeAnalysis"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">科室处理及整改意见：</label>
+                <textarea class="form-control" required maxlength="200" name="OfficeImprovementMeasure"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="offset-md-9 col-md-3" style="float:right">
+            <label class="form-inline">
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" minlength="4" maxlength="4" class="form-control date" style="width:30%;" name="OfficeSignYear">
+                <strong>年</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="12" class="form-control date" style="width:20%;" name="OfficeSignMonth">
+                <strong>月</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="31" class="form-control date" style="width:20%;" name="OfficeSignDay">
+                <strong>日</strong>
+            </label>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right ">
+        <div class="col-md-12">
+            <div class="form-group text-left">
+                <label for="Name">护理部处理及整改意见：</label>
+                <textarea class="form-control" required maxlength="200" name="NursingDepartmentImprovementMeasure"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row div-border-left div-border-right div-border-bottom">
+        <div class="offset-md-9 col-md-3" style="float:right">
+            <label class="form-inline">
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" minlength="4" maxlength="4" class="form-control date" style="width:30%;" name="NursingDepartmentSignYear">
+                <strong>年</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="12" class="form-control date" style="width:20%;" name="NursingDepartmentSignMonth">
+                <strong>月</strong>
+                <input type="text" required oninput="value=value.replace(/[^\d]/g,'')" maxlength="2" max="31" class="form-control date" style="width:20%;" name="NursingDepartmentSignDay">
+                <strong>日</strong>
+            </label>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-12 text-center">
+            <button type="submit" onclick="return submitAndCheck();" class="btn btn-default">保存</button>
+            <button type="button" id="btnBack" onclick="goBack()" class="btn btn-default">返回</button>
+        </div>
+    </div>
+</form>
+@section Scripts
+    {
+    <script>
+        $(function () {
+            $("input[name='EventsLevelChk']:checkbox").each(function () {
+                $(this).click(function () {
+                    if ($(this).prop('checked')) {
+                        $('input[name="EventsLevelChk"]').prop('checked', false);
+                        $(this).prop('checked', true);
+                    }
+                });
+            });
+        });
+
+
+        function goBack() {
+            window.location.href = "/nursereport/index";
+        }
+
+        function submitAndCheck() {
+            var inputIsValidValue = true;
+            var textareaIsValidValue = true;
+            var form = $("#nurseReportForm");
+           
+            $("input[name='EventsLevelChk']:checkbox").each(function () {
+                if ($(this).prop('checked')) {
+                    $("#EventsLevel").val($.trim($($(this).parent().find("span")).text()));
+                    return false;
+                }
+            });
+            $("input[type=text]").each(function (index, obj) {
+                if (obj.validity.valueMissing || obj.validity.tooShort || obj.validity.tooLong || obj.validity.patternMismatch) {
+                    inputIsValidValue = false;
+                }
+                if (!inputIsValidValue) {
+                    return false;
+                }
+            });
+            $("textarea").each(function (index, obj) {
+                if (obj.validity.valueMissing || obj.validity.tooShort || obj.validity.tooLong || obj.validity.patternMismatch) {
+                    textareaIsValidValue = false;
+                }
+                if (!textareaIsValidValue) {
+                    return false;
+                }
+            });
+            if (inputIsValidValue && textareaIsValidValue) {
+                if ($("input:checkbox[name='EventsLevelChk']:checked").length <= 0) {
+                    $("input:checkbox[name='EventsLevelChk']").focus();
+                    bootbox.alert("请选择事件发生等级！");
+                    return false;
+                }
+                submitForm();
+                window.event.preventDefault();
+            }
+        }
+
+        function submitForm() {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                url: "create",//url
+                data: $("#nurseReportForm").serialize(),
+                success: function (result) {
+                    bootbox.alert(result.message);
+                },
+                error: function () {
+                    bootbox.alert("保存失败！");
+                }
+            });
+        }
+    </script>
+}
+
+

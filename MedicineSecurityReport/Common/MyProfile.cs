@@ -28,6 +28,23 @@ namespace MedicineSecurityReport.Common
                 .ForMember(des => des.OccurrenceDateDay, op => op.MapFrom(md => md.OccurrenceDate.Day))
                 .ForMember(des => des.OccurrenceDateHour, op => op.MapFrom(md => md.OccurrenceDate.Hour))
                 .ForMember(des => des.OccurrenceDateMinute, op => op.MapFrom(md => md.OccurrenceDate.Minute));
+
+            CreateMap<NurseReportViewModel, NurseReportEntity>()
+               .ForMember(des => des.OccurrenceDate, op => op.MapFrom(vm => new DateTime(vm.OccurrenceDateYear, vm.OccurrenceDateMonth, vm.OccurrenceDateDay, vm.OccurrenceDateHour, vm.OccurrenceDateMinute, 0)))
+               .ForMember(des => des.OfficeSignDate, op => op.MapFrom(vm => new DateTime(vm.OfficeSignYear, vm.OfficeSignMonth, vm.OfficeSignDay)))
+               .ForMember(des => des.NursingDepartmentSignDate, op => op.MapFrom(vm => new DateTime(vm.NursingDepartmentSignYear, vm.NursingDepartmentSignMonth, vm.NursingDepartmentSignDay)));
+            CreateMap<NurseReportEntity, NurseReportViewModel>()
+                .ForMember(des => des.OfficeSignYear, op => op.MapFrom(md => md.OfficeSignDate.Year))
+                .ForMember(des => des.OfficeSignMonth, op => op.MapFrom(md => md.OfficeSignDate.Month))
+                .ForMember(des => des.OfficeSignDay, op => op.MapFrom(md => md.OfficeSignDate.Day))
+                .ForMember(des => des.NursingDepartmentSignYear, op => op.MapFrom(md => md.NursingDepartmentSignDate.Year))
+                .ForMember(des => des.NursingDepartmentSignMonth, op => op.MapFrom(md => md.NursingDepartmentSignDate.Month))
+                .ForMember(des => des.NursingDepartmentSignDay, op => op.MapFrom(md => md.NursingDepartmentSignDate.Day))
+                .ForMember(des => des.OccurrenceDateYear, op => op.MapFrom(md => md.OccurrenceDate.Year))
+                .ForMember(des => des.OccurrenceDateMonth, op => op.MapFrom(md => md.OccurrenceDate.Month))
+                .ForMember(des => des.OccurrenceDateDay, op => op.MapFrom(md => md.OccurrenceDate.Day))
+                .ForMember(des => des.OccurrenceDateHour, op => op.MapFrom(md => md.OccurrenceDate.Hour))
+                .ForMember(des => des.OccurrenceDateMinute, op => op.MapFrom(md => md.OccurrenceDate.Minute));
         }
     }
 }

@@ -1,37 +1,35 @@
-﻿@model List<ReportViewModel>
+﻿@model List<NurseReportViewModel>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "护理不良事件讨论改进记录列表";
 }
 
 <head>
-    <title>医疗质量安全（不良）事件报告列表</title>
+    <title>护理不良事件讨论改进记录列表</title>
 </head>
 <div class="row">
     <div class="col-md-12" style="text-align:center">
-        <h4><strong>医疗质量安全（不良）事件报告列表</strong></h4>
+        <h4><strong>护理不良事件讨论改进记录列表</strong></h4>
         <br />
     </div>
 </div>
 <br />
-@*<fieldset style="border:thin">*@
-@*<legend>查询</legend>*@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label class="form-inline">
-            患者姓名：
-            <input type="text" class="form-control myInput" style="width:50%;" id="PatientName" name="PatientName">
+            护士（当事人）姓名：
+            <input type="text" class="form-control myInput" style="width:50%;" id="nurseName" name="MedicalDepartment">
         </label>
     </div>
     <div class="col-md-3">
         <label class="form-inline">
-            科别：
-            <input type="text" class="form-control myInput" style="width:50%;" id="MedicalDepartment" name="MedicalDepartment">
+            贵宾姓名：
+            <input type="text" class="form-control myInput" style="width:50%;" id="distinguishedGuests" name="PatientName">
         </label>
     </div>
     <div class="col-md-3">
         <label class="form-inline">
-            住院号：
-            <input type="text" class="form-control myInput" style="width:50%;" id="HospitalNumber" name="HospitalNumber">
+            住院号/门诊号：
+            <input type="text" class="form-control myInput" style="width:50%;" id="hospitalNumber" name="HospitalNumber">
         </label>
     </div>
 </div>
@@ -41,24 +39,19 @@
         <button type="button" onclick="Create()" class="btn btn-default">新增</button>
     </div>
 </div>
-@*</fieldset>*@
 <br />
 <div class="table-responsive ">
     <table class="table table-striped" style="max-width:99%;">
-        @*<caption>医疗质量安全（不良）事件报告列表</caption>*@
         <thead>
             <tr>
                 <th hidden="hidden">Id</th>
-                <th>报告日期</th>
-                <th class="text-center">事件发生<br />日期</th>
-                <th style="white-space:nowrap;">患者姓名</th>
-                <th>科别</th>
-                <th>住院号</th>
-                <th class="text-center">事件发生<br />场所</th>
-                <th style="max-width:10%;" class="text-center">不良事件<br />类别</th>
-                <th>报告人</th>
-                <th>报告人<br />签名</th>
-                <th style="max-width:14%">操作</th>
+                <th class="text-center">事件<br>发生的时间</th>
+                <th class="text-center" style="white-space:nowrap;">护士<br />（当事人）姓名</th>
+                <th  class="text-center" style="white-space:nowrap;">贵 宾 姓 名</th>
+                <th class="text-center">住院号/门诊号</th>
+                <th class="text-center">事件<br />发生的地点</th>
+                <th class="text-center">事件<br />发生等级</th>
+                <th class="text-center" style="max-width:14%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -68,16 +61,13 @@
                 {
                     <tr>
                         <td hidden="hidden">@report.Id</td>
-                        <td>@(new DateTime(report.ReportYear, report.ReportMonth, report.ReportDay, report.ReportHour, report.ReportMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
-                        <td>@(new DateTime(report.OccurrenceDateYear, report.OccurrenceDateMonth, report.OccurrenceDateDay, report.OccurrenceDateHour, report.OccurrenceDateMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
-                        <td width="3%">@report.PatientName</td>
-                        <td>@report.MedicalDepartment</td>
-                        <td>@report.HospitalNumber</td>
-                        <td>@report.OccurrencePlace</td>
-                        <td width="10%">@report.BadEventsType</td>
-                        <td>@report.ReportPersonType</td>
-                        <td>@report.ReportPersonName</td>
-                        <td width="15%">
+                        <td class="text-center">@(new DateTime(report.OccurrenceDateYear, report.OccurrenceDateMonth, report.OccurrenceDateDay, report.OccurrenceDateHour, report.OccurrenceDateMinute, 0).ToString("yyyy-MM-dd HH:mm"))</td>
+                        <td class="text-center" width="3%">@report.NurseName</td>
+                        <td class="text-center">@report.DistinguishedGuests</td>
+                        <td class="text-center">@report.HospitalNumber</td>
+                        <td class="text-center">@report.OccurrencePlace</td>
+                        <td class="text-center" width="10%">@report.EventsLevel</td>
+                        <td class="text-center" width="15%">
                             <div class="row">
                                 @{
                                     string userId = string.Empty;
@@ -131,7 +121,7 @@
                 <ul class="pagination pagination-lg" style="float: right;">
                     @if (ViewBag.page != 1)
                     {
-                        <li><a href="@Url.Action("Index", new { PatientName= ViewBag.PatientName,MedicalDepartment=ViewBag.MedicalDepartment,HospitalNumber=ViewBag.HospitalNumber, page =(int)(ViewBag.page) -1})">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                        <li><a href="@Url.Action("Index", new { distinguishedGuests= ViewBag.DistinguishedGuests,nurseName=ViewBag.nurseName,hospitalNumber=ViewBag.HospitalNumber, page =(int)(ViewBag.page) -1})">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     }
                     else
                     {
@@ -139,7 +129,7 @@
                     }
                     @if (ViewBag.page != ViewBag.totalPage)
                     {
-                        <li><a href="@Url.Action("Index", new { PatientName= ViewBag.PatientName,MedicalDepartment=ViewBag.MedicalDepartment,HospitalNumber=ViewBag.HospitalNumber, page = (int)(ViewBag.page) + 1 })">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                        <li><a href="@Url.Action("Index", new { distinguishedGuests= ViewBag.DistinguishedGuests,nurseName=ViewBag.nurseName,hospitalNumber=ViewBag.HospitalNumber, page = (int)(ViewBag.page) + 1 })">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     }
                     else
                     {
@@ -161,13 +151,13 @@
     {
     <script>
         function Create() {
-            self.location = '/home/create';
+            self.location = '/nursereport/create';
         }
         function Detail(id) {
-            self.location = '/home/Detail?id=' + id;
+            self.location = '/nursereport/Detail?id=' + id;
         }
         function Query() {
-            self.location = '/home/Index?patientName=' + $("#PatientName").val() + "&medicalDepartment=" + $("#MedicalDepartment").val() + "&hospitalNumber=" + $("#HospitalNumber").val();
+            self.location = '/nursereport/Index?distinguishedGuests=' + $("#distinguishedGuests").val() + "&nurseName=" + $("#nurseName").val() + "&hospitalNumber=" + $("#hospitalNumber").val();
         }
         function Delete(id) {
             bootbox.confirm({
@@ -182,7 +172,7 @@
                 },
                 callback: function (result) {
                     if (result) {
-                        self.location = '/home/Delete?id=' + id;
+                        self.location = '/nursereport/Delete?id=' + id;
                     } else {
                         return;
                     }
@@ -190,7 +180,7 @@
             });
         }
             function Edit(id) {
-                self.location = '/home/Edit?id=' + id;
+                self.location = '/nursereport/Edit?id=' + id;
             }
     </script>
 }
